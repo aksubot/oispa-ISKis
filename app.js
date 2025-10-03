@@ -32,7 +32,7 @@
 // }
 
 document.addEventListener('touchstart', handleTouchStart, false);        
-document.addEventListener('touchmove', handleTouchMove, false);
+document.addEventListener('touchmove', handleTouchMove, {passive: false});
 
 var xDown = null;                                                        
 var yDown = null;
@@ -51,7 +51,7 @@ function handleTouchStart(evt) {
                                                                          
 async function handleTouchMove(evt) {
 
-    // evt.preventDefault()
+    evt.preventDefault()
 
     if ( ! xDown || ! yDown ) {
         return;
@@ -101,7 +101,7 @@ async function handleTouchMove(evt) {
     grid.randomEmptyCell().tile = newTile
     if (!canMoveDown() && !canMoveUp() && !canMoveLeft() && !canMoveRight()) {
         newTile.waitForTransition(true).then(() => {
-            alert("You Lose")
+            document.querySelector(".gameOver").classList.remove("false")
         })
         return
     }
