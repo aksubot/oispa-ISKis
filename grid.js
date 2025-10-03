@@ -5,6 +5,7 @@ const CELL_GAP = 2
 let score = 0;
 let increment;
 
+
 function setCookie(cname, cvalue, exdays) {
   const d = new Date();
   d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -29,6 +30,7 @@ function getCookie(cname) {
   return "";
 }
 
+
 let bestScore = 0;
 
 if(getCookie("bestScore") == ""){
@@ -40,14 +42,31 @@ else{
 
 document.getElementById("best").innerText = bestScore;
 
+const btn = document.querySelector(".btn")
+
+btn.onclick = function(){
+    console.log("yyyy")
+    score -= 300;
+    increment = -300;
+    updateScore;
+}
 
 const plus = document.querySelector(".plus")
 function updateScore() {
     document.getElementById("score").innerText = score;
+    if(score > 300){
+        btn.disabled = false;
+    }
+    else
+        btn.disabled = true;
 
     plus.innerHTML = '';
     const newIncrement = document.createElement("h3");
-    newIncrement.innerText = "+" + increment;
+    if(increment > 0)
+        newIncrement.innerText = "+" + increment;
+    else
+        newIncrement.innerText = increment;
+    
     plus.appendChild(newIncrement);
 }
 function updateBestScore() {
@@ -108,9 +127,16 @@ export default class Grid{
         return this.#cells.filter(cell=>cell.tile==null)
     }
     randomEmptyCell(){
+        
+
         const randomIndex=Math.floor(Math.random() * this.#emptyCells.length)
         return this.#emptyCells[randomIndex]
-
+    
+    }
+    lintsaa(){
+        score -= 300
+        increment = -300
+        updateScore()
     }
 }
 
@@ -161,6 +187,7 @@ class Cell{
     mergeTiles(){
         if(this.tile == null || this.mergeTile == null) return
         this.tile.value = this.tile.value + this.mergeTile.value
+        // console.log(this.mergeTile)
         this.mergeTile.remove()
 
         score += this.tile.value;
@@ -176,7 +203,17 @@ class Cell{
         this.mergeTile = null;
 
     }
+    destroyTiles(){
+        if(this.tile == null || this.tile == undefined) return
+        if(this.tile.value <= 8){
+            this.tile.remove()
+            this.tile = null
+        }
+
+
+    }
 }
+
 function createCellElements(gridElement){
     const cells=[]
     for(let i = 0; i < GRID_SIZE * GRID_SIZE; i++){

@@ -18,9 +18,9 @@ export default class Tile{
         this.#tileElement.textContent=v
         const power = Math.log2(v)
 
-        const backgroundImages = ["url('./kuvat/raija.jpg')",
-            "url('./kuvat/jehki.jpg')",
-            "url('./kuvat/saku.jpg')",
+        const backgroundImages = ["url('./kuvat/')",
+            "url('./kuvat/')",
+            "url('./kuvat/')",
         ]
 
         const backgroundImage = backgroundImages[power-1]

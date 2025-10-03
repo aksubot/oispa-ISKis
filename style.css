@@ -47,7 +47,8 @@ body{
 
   --x: 0;
   --y: 0;
-  --background-image: url('./kuvat/IMG20250715140519.jpg');
+
+  background-color: #fff;
 
   position: absolute;
 
@@ -67,7 +68,7 @@ body{
   background-position: center;
 
   animation: show 200ms ease-in-out;
-  transition: 100ms ease-in-out;
+  transition: 150ms ease-in-out;
 }
 
 @keyframes show {
@@ -190,6 +191,51 @@ span{
 }
 
 
+
+.gameOver{
+  position: absolute;
+  width: 66vmin;
+  background-color: #ccc;
+  height: 66vmin;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 1vmin;
+  opacity: 1;
+
+  transition: opacity 3s ease;
+
+  z-index: 999;
+
+}
+
+.gameOver.false{
+  opacity: 0;
+  z-index: -1;
+}
+
+.btn, .gameOverBtn{
+  background-color: #ccc;
+  padding: 10px 20px;
+  margin-top: 20px;
+
+  font-size: 18px;
+  color: black;
+  text-transform: uppercase;
+  font-weight: 500;
+
+  border-radius: 1vmin;
+  cursor: pointer;
+}
+
+.btn:disabled{
+  cursor:auto;
+  filter: opacity(.7);
+}
 
 /* popups */
 

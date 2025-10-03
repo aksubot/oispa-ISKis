@@ -111,13 +111,20 @@ async function handleTouchMove(evt) {
 };
 
 
+document.querySelector(".btn").onclick = function(){
 
+    grid.cells.forEach(
+        cell => cell.destroyTiles()
+    )
 
+    grid.lintsaa()
 
+}
 
 
 import Grid from "./grid.js"
-import Tile from "./TILE.JS"
+import Tile from "./tile.js"
+
 const boardgame = document.querySelector('.board-game')
 const grid = new Grid(boardgame)
 grid.randomEmptyCell().tile = new Tile(boardgame)
@@ -166,7 +173,7 @@ async function handleInput(e) {
     grid.randomEmptyCell().tile = newTile
     if (!canMoveDown() && !canMoveUp() && !canMoveLeft() && !canMoveRight()) {
         newTile.waitForTransition(true).then(() => {
-            alert("You Lose")
+            document.querySelector(".gameOver").classList.remove("false");
         })
         return
     }
